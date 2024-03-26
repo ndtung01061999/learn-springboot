@@ -1,22 +1,19 @@
 package com.vn.devmaster.services.entites;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-@Table(name = "clazz")
+@Table(name = "subject")
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Builder
-public class Clazz {
+public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,6 +22,7 @@ public class Clazz {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "clazz", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "subjects")
     private List<Student> students = new ArrayList<>();
+
 }

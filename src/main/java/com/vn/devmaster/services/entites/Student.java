@@ -1,10 +1,12 @@
 package com.vn.devmaster.services.entites;
 
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Table(name = "student")
 @Entity
@@ -28,7 +30,13 @@ public class Student {
     @Column(name = "address")
     private String address;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "clazz_id")
     private Clazz clazz;
+
+    @ManyToMany
+    @JoinTable(name = "student_subject",
+            joinColumns = @JoinColumn(name = "id_student", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_subject", referencedColumnName = "id"))
+    private List<Subject> subjects = new ArrayList<>();
 }

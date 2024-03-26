@@ -2,18 +2,18 @@ package com.vn.devmaster.services.mapper;
 
 import com.vn.devmaster.services.dto.StudentDTO;
 import com.vn.devmaster.services.entites.Student;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class StudentMapper implements EntityMapper<Student, StudentDTO> {
     private final ClazzMapper clazzMapper;
+    private final SubjectMapper subjectMapper;
 
-    public StudentMapper(ClazzMapper clazzMapper) {
-        this.clazzMapper = clazzMapper;
-    }
 
     @Override
     public Student toEntity(StudentDTO dto) {
@@ -35,6 +35,7 @@ public class StudentMapper implements EntityMapper<Student, StudentDTO> {
                 .address(entity.getAddress())
                 .name(entity.getLastName()+ " " + entity.getFirstName())
                 .clazz(clazzMapper.toDto(entity.getClazz()))
+                .subjects(subjectMapper.toDto(entity.getSubjects()))
                 .build();
     }
 

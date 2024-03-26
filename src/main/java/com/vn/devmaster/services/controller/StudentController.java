@@ -3,6 +3,8 @@ package com.vn.devmaster.services.controller;
 
 import com.vn.devmaster.services.dto.StudentDTO;
 import com.vn.devmaster.services.entites.Student;
+import com.vn.devmaster.services.projection.IStudentPoint;
+import com.vn.devmaster.services.repository.StudentRepository;
 import com.vn.devmaster.services.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +16,8 @@ import java.util.List;
 public class StudentController {
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private StudentRepository studentRepository;
 
 
     @GetMapping("")
@@ -36,5 +40,10 @@ public class StudentController {
     String update(@RequestParam("id") int id, @RequestBody StudentDTO studentDTO) {
         String message = studentService.update(id, studentDTO);
         return message;
+    }
+
+    @GetMapping("/{id}")
+    List<IStudentPoint> getStudentById(@PathVariable int id) {
+        return studentService.findStudentById(id);
     }
 }

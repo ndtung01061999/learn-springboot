@@ -1,10 +1,12 @@
 package com.vn.devmaster.services.dto;
 
-import com.vn.devmaster.services.entites.Clazz;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,4 +17,5 @@ public class StudentDTO {
     private String name;
     private String address;
     private ClazzDTO clazz;
+    private List<SubjectDTO> subjects = new ArrayList<>();
 }
